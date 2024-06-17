@@ -1,0 +1,82 @@
+import time
+import random
+
+# Function to log activities with timestamp
+def log_activity(message):
+    timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+    print(f"[{timestamp}] {message}")
+
+# Simulate basic network services (hypothetical)
+class NetworkService:
+    def __init__(self, name, port):
+        self.name = name
+        self.port = port
+        self.running = False
+
+    def start(self):
+        self.running = True
+        log_activity(f"Started {self.name} service on port {self.port}")
+
+    def stop(self):
+        self.running = False
+        log_activity(f"Stopped {self.name} service on port {self.port}")
+
+# Simulate blue team defending network
+class BlueTeam:
+    def __init__(self):
+        self.services = {
+            "Web Server": NetworkService("Web Server", 80),
+            "Database": NetworkService("Database", 3306),
+            "Firewall": NetworkService("Firewall", 443)
+        }
+
+    def start_services(self):
+        for service in self.services.values():
+            service.start()
+
+    def stop_service(self, service_name):
+        if service_name in self.services:
+            self.services[service_name].stop()
+
+    def detect_attack(self):
+        # Simulate detection of attacks (randomly)
+        attack_detected = random.choice([True, False])
+        if attack_detected:
+            log_activity("Blue team detected a potential attack.")
+
+# Simulate red team attacking network
+class RedTeam:
+    def __init__(self):
+        self.attack_scenarios = [
+            "Phishing Attack",
+            "SQL Injection",
+            "DDoS Attack",
+            "Credential Theft"
+        ]
+
+    def execute_attack(self):
+        attack_scenario = random.choice(self.attack_scenarios)
+        log_activity(f"Red team executing {attack_scenario}...")
+        time.sleep(random.randint(1, 5))  # Simulate attack execution time
+        log_activity(f"{attack_scenario} completed.")
+
+# Main simulation loop
+def simulate_cybersecurity_exercise():
+    blue_team = BlueTeam()
+    red_team = RedTeam()
+
+    log_activity("Starting cybersecurity exercise simulation...")
+    blue_team.start_services()
+
+    while True:
+        # Red team executes attack
+        red_team.execute_attack()
+
+        # Blue team detects and responds to attacks
+        blue_team.detect_attack()
+
+        # Simulate ongoing exercise (repeat every few minutes)
+        time.sleep(random.randint(120, 300))  # Simulate time between attacks
+
+# Run the simulation
+simulate_cybersecurity_exercise()
