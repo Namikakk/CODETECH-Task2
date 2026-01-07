@@ -22,4 +22,4 @@ Monitor network traffic, system logs, and security alerts using monitoring tools
 Benefits of Simulated Cybersecurity Exercises:
  1. Real-World Simulation
  2. Training and Skill Development
- 3. Identifying Weaknesses:
+ 3. Identifying Weaknesses
